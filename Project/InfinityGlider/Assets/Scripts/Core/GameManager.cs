@@ -27,10 +27,7 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-    }
 
-    private void Start()
-    {
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
 
         display = FindAnyObjectByType<UIScoreDisplay>();
