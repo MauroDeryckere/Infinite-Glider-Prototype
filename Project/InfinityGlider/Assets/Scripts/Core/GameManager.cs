@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         gameOverUI?.Show(score, highScore);
         display?.Hide();
 
-        Time.timeScale = 0f;    
+        Time.timeScale = 0f;
     }
 
     private void SaveHighScore()

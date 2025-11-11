@@ -23,8 +23,8 @@ public class GameOverUI : MonoBehaviour
     public void Show(float finalScore, float highScore)
     {
         panel.SetActive(true);
-        scoreText.text = $"Score: {Mathf.FloorToInt(finalScore)}";
-        highScoreText.text = $"Highscore: {Mathf.FloorToInt(highScore)}";
+        scoreText.text = $"Score: {finalScore:F0}";
+        highScoreText.text = $"Highscore: {highScore:F0}";
     }
 
     public void OnRestartPressed()
