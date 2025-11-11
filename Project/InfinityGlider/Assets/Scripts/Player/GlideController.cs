@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class GlideController : MonoBehaviour
@@ -10,25 +11,46 @@ public class GlideController : MonoBehaviour
     [SerializeField] private float gravityForce = 9.8f;
 
     [Header("Glide Control")]
-    [SerializeField] private float liftDecay = 0.98f;  // how quickly lift fades when not gliding
-    [SerializeField] private float minAltitude = -10f; // respawn threshold
+    [SerializeField] private float liftDecay = 0.98f;
+    [SerializeField] private float minAltitude = -10f;
 
     [Header("Debug")]
     [SerializeField] private bool isGliding = true;
 
     private Rigidbody rb;
+    private PlayerControls controls;
+    private Vector2 moveInput;
+    private bool glideHeld;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         // handled manually
-        rb.useGravity = false; 
+        rb.useGravity = false;
+
+        controls = new PlayerControls();
     }
+
+    private void OnEnable()
+    {
+        controls.Player.Enable();
+
+        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += _ => moveInput = Vector2.zero;
+
+        controls.Player.Glide.performed += _ => glideHeld = true;
+        controls.Player.Glide.canceled += _ => glideHeld = false;
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Disable();
+    }
+
 
     private void Update()
     {
-        HandleInput();
         CheckRespawn();
     }
 
@@ -37,34 +59,23 @@ public class GlideController : MonoBehaviour
         ApplyMovement();
     }
 
-    private void HandleInput()
-    {
-        // Toggle glide state (for later shield or dive controls)
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isGliding = !isGliding;
-        }
-    }
-
     private void ApplyMovement()
     {
-        // Forward motion
+        // Base Forward motion
         Vector3 forwardMove = transform.forward * forwardSpeed;
 
         // Gravity and lift
-        Vector3 verticalForce = Vector3.down * gravityForce;
-
-        if (isGliding)
-        {
-            verticalForce += Vector3.up * glideLift;
-            glideLift *= liftDecay; // smooth decay over time
-        }
-
-        // Apply rotation (left/right)
-        float turnInput = Input.GetAxis("Horizontal");
+        float turnInput = moveInput.x;
         transform.Rotate(Vector3.up, turnInput * turnSpeed * Time.fixedDeltaTime);
 
-        // Final velocity
+        Vector3 verticalForce = Vector3.down * gravityForce;
+
+        if (isGliding || glideHeld)
+        {
+            verticalForce += Vector3.up * glideLift;
+            glideLift *= liftDecay;
+        }
+
         rb.linearVelocity = forwardMove + verticalForce;
     }
 
@@ -72,7 +83,7 @@ public class GlideController : MonoBehaviour
     {
         if (transform.position.y < minAltitude)
         {
-            transform.position = Vector3.up * 5f;
+            transform.position = new Vector3(0f, 5f, transform.position.z);
             rb.linearVelocity = Vector3.zero;
         }
     }
