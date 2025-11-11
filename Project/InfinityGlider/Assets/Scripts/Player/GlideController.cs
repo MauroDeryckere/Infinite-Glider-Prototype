@@ -21,6 +21,13 @@ public class GlideController : MonoBehaviour
     [Header("Glide Control")]
     [SerializeField] private float liftDecay = 0.98f;
 
+    [Header("Shield Settings")]
+    [SerializeField] private GameObject shieldVisual;
+    [SerializeField] private float shieldFadeSpeed = 2f;
+
+    private float shieldTimer = 0f;
+    private float baseShieldAlpha = 1f; // remember original alpha
+
     [Header("Debug")]
     [SerializeField] private bool isGliding = true;
     [SerializeField] private bool hasShield = false;
@@ -42,6 +49,17 @@ public class GlideController : MonoBehaviour
         controls = new PlayerControls();
 
         baseRotation = transform.rotation; // remember starting forward direction
+
+        if (shieldVisual)
+        {
+            var renderer = shieldVisual.GetComponent<Renderer>();
+            if (renderer && renderer.sharedMaterial.HasProperty("_Color"))
+            {
+                // store starting alpha
+                baseShieldAlpha = renderer.sharedMaterial.color.a;
+            }
+            shieldVisual.SetActive(false);
+        }
     }
 
     private void OnEnable()
@@ -63,6 +81,11 @@ public class GlideController : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyMovement();
+    }
+
+    private void Update()
+    {
+        UpdateShield();
     }
 
     private void ApplyMovement()
@@ -104,7 +127,7 @@ public class GlideController : MonoBehaviour
 
         if (isDead)
         {
-            return; 
+            return;
         }
 
         int layer = other.gameObject.layer;
@@ -116,6 +139,11 @@ public class GlideController : MonoBehaviour
         if (hasShield)
         {
             hasShield = false;
+            if (shieldVisual)
+            {
+                shieldVisual.SetActive(false);
+            }
+
             Debug.Log("Shield absorbed collision!");
             return;
         }
@@ -139,14 +167,60 @@ public class GlideController : MonoBehaviour
     public void ActivateShield(float duration)
     {
         hasShield = true;
-        //TODO
-       // shieldTimer = duration;
+        shieldTimer = duration;
+
         Debug.Log($"Shield activated for {duration} seconds");
+
+        if (shieldVisual)
+        {
+            shieldVisual.SetActive(true);
+            var renderer = shieldVisual.GetComponent<Renderer>();
+
+            if (renderer && renderer.material.HasProperty("_Color"))
+            {
+                Color c = renderer.material.color;
+                c.a = baseShieldAlpha;
+                renderer.material.color = c;
+            }
+        }
     }
 
     public void ApplyUpliftBoost(float force)
     {
         rb.linearVelocity += Vector3.up * force;
         Debug.Log($"Uplift boost impulse applied: +{force}");
+    }
+
+    private void UpdateShield()
+    {
+        if (!hasShield)
+        {
+            return;
+        }
+
+        shieldTimer -= Time.deltaTime;
+        if (shieldTimer <= 0f)
+        {
+            hasShield = false;
+            if (shieldVisual)
+            {
+                shieldVisual.SetActive(false);
+            }
+
+            Debug.Log("Shield expired!");
+        }
+        else if (shieldVisual)
+        {
+            if (shieldTimer < 1f)
+            {
+                var renderer = shieldVisual.GetComponent<Renderer>();
+                if (renderer && renderer.material.HasProperty("_Color"))
+                {
+                    Color c = renderer.material.color;
+                    c.a = baseShieldAlpha * Mathf.PingPong(Time.time * shieldFadeSpeed, 1f);
+                    renderer.material.color = c;
+                }
+            }
+        }
     }
 }
