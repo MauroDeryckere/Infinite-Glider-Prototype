@@ -76,9 +76,16 @@ public class MapGenerator : MonoBehaviour
             return;
         }
 
-        // Randomly pick a prefab
-        var prefab = tilePrefabs[Random.Range(0, tilePrefabs.Count)];
-        var go = Instantiate(prefab, new Vector3(0f, 0f, nextSpawnZ), Quaternion.identity, transform);
+        int idx = Random.Range(0, tilePrefabs.Count);
+        var prefab = tilePrefabs[idx];
+        if (prefab == null)
+        {
+            Debug.LogWarning($"MapGenerator: tilePrefabs[{idx}] is null.");
+            return;
+        }
+        Quaternion spawnRot = prefab.transform.rotation;
+
+        var go = Instantiate(prefab, new Vector3(0f, 0f, nextSpawnZ), spawnRot, transform);
 
         float length = 20f;
         if (go.TryGetComponent<Tile>(out var tileComponent))
