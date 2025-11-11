@@ -151,7 +151,7 @@ public class GlideController : MonoBehaviour
         Die();
     }
 
-    private void Die()
+    public void Die()
     {
         isDead = true;
 

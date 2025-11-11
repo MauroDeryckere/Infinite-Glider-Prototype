@@ -9,6 +9,7 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Generation Settings")]
     [SerializeField] private int tilesAhead = 6;
+    [SerializeField] private int tilesBehind = 2;
     [SerializeField] private float initialZ = 0f;
 
     private class TileEntry
@@ -61,9 +62,9 @@ public class MapGenerator : MonoBehaviour
         if (activeTiles.Count > 0)
         {
             var first = activeTiles.Peek();
-            if (player.position.z > first.startZ + first.length)
+            if (player.position.z > first.startZ + first.length * (1 + tilesBehind))
             {
-                RecycleTile();
+                RemoveOldTile();
             }
         }
     }
@@ -83,8 +84,8 @@ public class MapGenerator : MonoBehaviour
             Debug.LogWarning($"MapGenerator: tilePrefabs[{idx}] is null.");
             return;
         }
-        Quaternion spawnRot = prefab.transform.rotation;
 
+        Quaternion spawnRot = prefab.transform.rotation;
         var go = Instantiate(prefab, new Vector3(0f, 0f, nextSpawnZ), spawnRot, transform);
 
         float length = 20f;
@@ -99,38 +100,12 @@ public class MapGenerator : MonoBehaviour
         nextSpawnZ += length;
     }
 
-    private void RecycleTile()
+    private void RemoveOldTile()
     {
         var old = activeTiles.Dequeue();
-
-        old.go.transform.position = new Vector3(0f, 0f, nextSpawnZ);
-        old.go.transform.rotation = Quaternion.identity;
-
-        float length = old.length;
-        if (old.go.TryGetComponent<Tile>(out var tileComp))
+        if (old.go != null)
         {
-            length = tileComp.Length;
-        }
-
-        old.length = length;
-        old.startZ = nextSpawnZ;
-
-        activeTiles.Enqueue(old);
-    }
-
-#if UNITY_EDITOR
-    // gizmo: preview spawned ranges
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        if (activeTiles != null)
-        {
-            foreach (var t in activeTiles)
-            {
-                if (t?.go == null) continue;
-                Gizmos.DrawWireCube(new Vector3(0f, 0.1f, t.startZ + t.length * 0.5f), new Vector3(10f, 0.2f, t.length));
-            }
+            Destroy(old.go);
         }
     }
-#endif
 }
