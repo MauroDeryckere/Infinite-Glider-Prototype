@@ -187,8 +187,10 @@ public class GlideController : MonoBehaviour
 
     public void ApplyUpliftBoost(float force)
     {
-        rb.AddForce(Vector3.up * force, ForceMode.VelocityChange);
-        Debug.Log($"Uplift boost impulse applied: +{force}");
+        Vector3 boostDirection = (Vector3.up * 0.8f + transform.forward * 0.2f).normalized;
+
+        rb.AddForce(boostDirection * force, ForceMode.VelocityChange);
+        Debug.Log($"Uplift boost impulse applied (dir: {boostDirection}, force: {force})");
     }
 
     private void UpdateShield()
