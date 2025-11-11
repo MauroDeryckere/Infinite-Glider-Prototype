@@ -14,6 +14,7 @@ public class GlideController : MonoBehaviour
     [SerializeField] private float glideLift = 5f;
     [SerializeField] private float gravityForce = 9.8f;
     [SerializeField] private float maxTurnAngle = 45f;
+
     private float currentYaw = 0f;
     private Quaternion baseRotation;
 
@@ -22,11 +23,14 @@ public class GlideController : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool isGliding = true;
+    [SerializeField] private bool hasShield = false;
 
     private Rigidbody rb;
     private PlayerControls controls;
     private Vector2 moveInput;
     private bool glideHeld;
+
+
 
     private void Awake()
     {
@@ -94,7 +98,7 @@ public class GlideController : MonoBehaviour
         rb.linearVelocity = forwardMove + verticalForce;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Hit: " + collision.gameObject.name + " on layer " + collision.gameObject.layer);
 
@@ -103,10 +107,20 @@ public class GlideController : MonoBehaviour
             return; 
         }
 
-        if (((1 << collision.gameObject.layer) & obstacleMask) != 0)
+        int layer = other.gameObject.layer;
+        if (((1 << layer) & obstacleMask) == 0)
         {
-            Die();
+            return;
         }
+
+        if (hasShield)
+        {
+            hasShield = false;
+            Debug.Log("Shield absorbed collision!");
+            return;
+        }
+
+        Die();
     }
 
     private void Die()
@@ -119,5 +133,20 @@ public class GlideController : MonoBehaviour
 
         enabled = false;
         GameManager.Instance?.OnPlayerDied();
+    }
+
+
+    public void ActivateShield(float duration)
+    {
+        hasShield = true;
+        //TODO
+       // shieldTimer = duration;
+        Debug.Log($"Shield activated for {duration} seconds");
+    }
+
+    public void ApplyUpliftBoost(float force)
+    {
+        rb.linearVelocity += Vector3.up * force;
+        Debug.Log($"Uplift boost impulse applied: +{force}");
     }
 }
