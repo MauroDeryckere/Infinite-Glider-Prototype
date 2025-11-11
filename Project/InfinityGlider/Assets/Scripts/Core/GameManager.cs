@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-    
+using System.IO;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     private UIScoreDisplay display;
 
+    private string savePath;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -24,14 +27,21 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        highScore = PlayerPrefs.GetFloat("HighScore", 0f);
     }
 
     private void Start()
     {
+        savePath = Path.Combine(Application.persistentDataPath, "save.json");
+
         display = FindAnyObjectByType<UIScoreDisplay>();
+
+        Time.timeScale = 1f;
+
+        isGameOver = false;
+        score = 0f;
+
+        LoadHighScore();
+        display?.UpdateScore(score, highScore);
     }
 
     private void Update()
@@ -62,8 +72,7 @@ public class GameManager : MonoBehaviour
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetFloat("HighScore", highScore);
-            PlayerPrefs.Save();
+            SaveHighScore();
         }
 
         if (display != null)
@@ -78,7 +87,30 @@ public class GameManager : MonoBehaviour
     private System.Collections.IEnumerator RestartAfterDelay(float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
-        Time.timeScale = 1f;
+
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void SaveHighScore()
+    {
+        SaveData data = new SaveData { highScore = highScore };
+        File.WriteAllText(savePath, JsonUtility.ToJson(data));
+        Debug.Log($"Highscore saved to: {savePath}");
+    }
+
+    private void LoadHighScore()
+    {
+        if (File.Exists(savePath))
+        {
+            string json = File.ReadAllText(savePath);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            highScore = data.highScore;
+            Debug.Log($"Loaded highscore: {highScore}");
+        }
+        else
+        {
+            Debug.Log("No save file found, starting fresh.");
+        }
     }
 }

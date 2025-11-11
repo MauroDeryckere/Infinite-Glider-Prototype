@@ -8,7 +8,7 @@ public class UIScoreDisplay : MonoBehaviour
 
     private void Start()
     {
-        UpdateScore(0f, 0f);
+
     }
 
     public void UpdateScore(float score, float highscore)
