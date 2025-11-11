@@ -28,14 +28,8 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        savePath = Path.Combine(Application.persistentDataPath, "save.json");
-
         display = FindAnyObjectByType<UIScoreDisplay>();
-
-        Time.timeScale = 1f;
-
-        isGameOver = false;
-        score = 0f;
+        savePath = Path.Combine(Application.persistentDataPath, "save.json");
 
         LoadHighScore();
         display?.UpdateScore(score, highScore);
