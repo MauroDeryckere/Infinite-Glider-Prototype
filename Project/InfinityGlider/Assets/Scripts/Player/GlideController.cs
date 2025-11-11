@@ -13,6 +13,9 @@ public class GlideController : MonoBehaviour
     [SerializeField] private float turnSpeed = 60f;
     [SerializeField] private float glideLift = 5f;
     [SerializeField] private float gravityForce = 9.8f;
+    [SerializeField] private float maxTurnAngle = 45f;
+    private float currentYaw = 0f;
+    private Quaternion baseRotation;
 
     [Header("Glide Control")]
     [SerializeField] private float liftDecay = 0.98f;
@@ -33,6 +36,8 @@ public class GlideController : MonoBehaviour
         rb.useGravity = false;
 
         controls = new PlayerControls();
+
+        baseRotation = transform.rotation; // remember starting forward direction
     }
 
     private void OnEnable()
@@ -58,13 +63,25 @@ public class GlideController : MonoBehaviour
 
     private void ApplyMovement()
     {
+        //Turning
+        float turnInput = moveInput.x;
+
+        // Update yaw based on input and clamp to maxTurnAngle
+        currentYaw += turnInput * turnSpeed * Time.fixedDeltaTime;
+        currentYaw = Mathf.Clamp(currentYaw, -maxTurnAngle, maxTurnAngle);
+
+        // Compute final rotation (keep within limited arc)
+        Quaternion targetRotation = baseRotation * Quaternion.Euler(0f, currentYaw, 0f);
+
+        float rollAngle = -currentYaw * 0.5f;
+        targetRotation *= Quaternion.Euler(0f, 0f, rollAngle);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5f);
+
         // Base Forward motion
         Vector3 forwardMove = transform.forward * forwardSpeed;
 
-        // Gravity and lift
-        float turnInput = moveInput.x;
-        transform.Rotate(Vector3.up, turnInput * turnSpeed * Time.fixedDeltaTime);
-
+        // Gravity and Glide Lift
         Vector3 verticalForce = Vector3.down * gravityForce;
 
         if (isGliding || glideHeld)
@@ -73,8 +90,10 @@ public class GlideController : MonoBehaviour
             glideLift *= liftDecay;
         }
 
+        // Combine forces
         rb.linearVelocity = forwardMove + verticalForce;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         //Debug.Log("Hit: " + collision.gameObject.name + " on layer " + collision.gameObject.layer);
