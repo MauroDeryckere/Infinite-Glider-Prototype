@@ -152,12 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5097bb76a318b545b224d7e2c4f0f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
   forwardSpeed: 10
   turnSpeed: 60
   glideLift: 5
   gravityForce: 9.8
   liftDecay: 0.98
-  minAltitude: -10
   isGliding: 1
 --- !u!1 &4731404784403373463
 GameObject:

@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class GlideController : MonoBehaviour
 {
+    [Header("Obstacle Settings")]
+    [SerializeField] private LayerMask obstacleMask;
+    private bool isDead = false;
+
     [Header("Movement Settings")]
     [SerializeField] private float forwardSpeed = 10f;
     [SerializeField] private float turnSpeed = 60f;
@@ -12,7 +16,6 @@ public class GlideController : MonoBehaviour
 
     [Header("Glide Control")]
     [SerializeField] private float liftDecay = 0.98f;
-    [SerializeField] private float minAltitude = -10f;
 
     [Header("Debug")]
     [SerializeField] private bool isGliding = true;
@@ -48,12 +51,6 @@ public class GlideController : MonoBehaviour
         controls.Player.Disable();
     }
 
-
-    private void Update()
-    {
-        CheckRespawn();
-    }
-
     private void FixedUpdate()
     {
         ApplyMovement();
@@ -78,13 +75,30 @@ public class GlideController : MonoBehaviour
 
         rb.linearVelocity = forwardMove + verticalForce;
     }
-
-    private void CheckRespawn()
+    private void OnCollisionEnter(Collision collision)
     {
-        if (transform.position.y < minAltitude)
+        //Debug.Log("Hit: " + collision.gameObject.name + " on layer " + collision.gameObject.layer);
+
+        if (isDead)
         {
-            transform.position = new Vector3(0f, 5f, transform.position.z);
-            rb.linearVelocity = Vector3.zero;
+            return; 
         }
+
+        if (((1 << collision.gameObject.layer) & obstacleMask) != 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+
+        // Disable input / physics
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = true;
+
+        enabled = false;
+        GameManager.Instance?.OnPlayerDied();
     }
 }
