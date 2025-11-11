@@ -5,6 +5,8 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    [SerializeField] private GameOverUI gameOverUI;
+    [SerializeField] private UIScoreDisplay display;
 
     private bool isGameOver = false;
 
@@ -13,8 +15,6 @@ public class GameManager : MonoBehaviour
 
     public float Score => score;
     public float HighScore => highScore;
-
-    private UIScoreDisplay display;
 
     private string savePath;
 
@@ -28,10 +28,13 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        display = FindAnyObjectByType<UIScoreDisplay>();
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
 
         LoadHighScore();
+    }
+
+    private void Start()
+    {
         display?.UpdateScore(score, highScore);
     }
 
@@ -43,11 +46,7 @@ public class GameManager : MonoBehaviour
         }
             
         score += Time.deltaTime * 10f;
-
-        if (display != null)
-        {
-            display.UpdateScore(score, highScore);  
-        }
+        display?.UpdateScore(score, highScore);  
     }
 
     public void OnPlayerDied()
@@ -66,21 +65,10 @@ public class GameManager : MonoBehaviour
             SaveHighScore();
         }
 
-        if (display != null)
-        {
-            display.UpdateScore(0f, highScore);
-        }
+        gameOverUI?.Show(score, highScore);
+        display?.Hide();
 
-        Time.timeScale = 0f;
-        StartCoroutine(RestartAfterDelay(2f));
-    }
-
-    private System.Collections.IEnumerator RestartAfterDelay(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 0f;    
     }
 
     private void SaveHighScore()
