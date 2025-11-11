@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8200620112703870234}
   - component: {fileID: -3853795194401332055}
+  - component: {fileID: 877723028363033672}
+  - component: {fileID: 5687753403463467579}
   m_Layer: 5
   m_Name: UIManager
   m_TagString: Untagged
@@ -50,3 +52,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
   highscoreText: {fileID: 0}
+  panel: {fileID: 0}
+--- !u!114 &877723028363033672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737923981270652348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb004806d0055d49ad9f0bf71ba6dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
+  scoreText: {fileID: 0}
+  highScoreText: {fileID: 0}
+  restartButton: {fileID: 0}
+  quitButton: {fileID: 0}
+--- !u!114 &5687753403463467579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737923981270652348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81438c28c9b55b54da7ff8b3f2985998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintText: {fileID: 0}
+  displayDuration: 1

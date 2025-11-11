@@ -624,6 +624,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2116860068}
     - target: {fileID: -3853795194401332055, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3853795194401332055, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 40820184}
@@ -631,9 +635,49 @@ PrefabInstance:
       propertyPath: highscoreText
       value: 
       objectReference: {fileID: 725775459}
+    - target: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 1820649129}
+    - target: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 410816529}
+    - target: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: quitButton
+      value: 
+      objectReference: {fileID: 202253528}
+    - target: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: highScoreText
+      value: 
+      objectReference: {fileID: 8226491177301809650}
+    - target: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: restartButton
+      value: 
+      objectReference: {fileID: 452028325}
     - target: {fileID: 2737923981270652348, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
       propertyPath: m_Name
       value: UIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2737923981270652348, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687753403463467579, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: hintText
+      value: 
+      objectReference: {fileID: 7960967675321185646}
+    - target: {fileID: 5687753403463467579, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687753403463467579, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: displayDuration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8200620112703870234, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
       propertyPath: m_Pivot.x
@@ -718,39 +762,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2737923981270652348, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1616439130}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
---- !u!1 &1616439129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2737923981270652348, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+--- !u!114 &1616439130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
   m_PrefabInstance: {fileID: 1616439128}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1616439130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616439129}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eb004806d0055d49ad9f0bf71ba6dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 1820649129}
-  scoreText: {fileID: 410816529}
-  highScoreText: {fileID: 8226491177301809650}
-  restartButton: {fileID: 452028325}
-  quitButton: {fileID: 202253528}
 --- !u!114 &1616439131 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -3853795194401332055, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
   m_PrefabInstance: {fileID: 1616439128}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616439129}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b2fc7ea269aa114e874182847c18a45, type: 3}
@@ -1108,6 +1138,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6777017360932606304, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7974260543639227026, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1197,6 +1231,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
+--- !u!114 &7960967675321185646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3664255927888018053, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
+  m_PrefabInstance: {fileID: 7960967675321185645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8226491177301809649
 PrefabInstance:
   m_ObjectHideFlags: 0

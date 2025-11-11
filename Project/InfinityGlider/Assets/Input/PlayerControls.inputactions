@@ -23,15 +23,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Shield",
-                    "type": "Button",
-                    "id": "9251d275-39dd-4489-8456-f17b0d40aa66",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -89,17 +80,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "a622d6e6-df1c-4151-8224-0adf4fb06ac3",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shield",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

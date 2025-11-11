@@ -14,7 +14,7 @@ public class GameOverUI : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        panel.SetActive(false);
 
         restartButton.onClick.AddListener(OnRestartPressed);
         quitButton.onClick.AddListener(OnQuitPressed);

@@ -9,7 +9,6 @@ public class UIScoreDisplay : MonoBehaviour
 
     private void Start()
     {
-
     }
 
     public void Hide()

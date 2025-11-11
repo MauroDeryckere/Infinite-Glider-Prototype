@@ -109,15 +109,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Shield"",
-                    ""type"": ""Button"",
-                    ""id"": ""9251d275-39dd-4489-8456-f17b0d40aa66"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,17 +169,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a622d6e6-df1c-4151-8224-0adf4fb06ac3"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shield"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""d44dec5a-7354-4504-843b-76b0da388dba"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -207,7 +187,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Glide = m_Player.FindAction("Glide", throwIfNotFound: true);
-        m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -290,7 +269,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Glide;
-    private readonly InputAction m_Player_Shield;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -310,10 +288,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Glide".
         /// </summary>
         public InputAction @Glide => m_Wrapper.m_Player_Glide;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/Shield".
-        /// </summary>
-        public InputAction @Shield => m_Wrapper.m_Player_Shield;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -346,9 +320,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Glide.started += instance.OnGlide;
             @Glide.performed += instance.OnGlide;
             @Glide.canceled += instance.OnGlide;
-            @Shield.started += instance.OnShield;
-            @Shield.performed += instance.OnShield;
-            @Shield.canceled += instance.OnShield;
         }
 
         /// <summary>
@@ -366,9 +337,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Glide.started -= instance.OnGlide;
             @Glide.performed -= instance.OnGlide;
             @Glide.canceled -= instance.OnGlide;
-            @Shield.started -= instance.OnShield;
-            @Shield.performed -= instance.OnShield;
-            @Shield.canceled -= instance.OnShield;
         }
 
         /// <summary>
@@ -423,12 +391,5 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGlide(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Shield" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnShield(InputAction.CallbackContext context);
     }
 }
