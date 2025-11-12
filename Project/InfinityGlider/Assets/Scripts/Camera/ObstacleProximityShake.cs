@@ -8,6 +8,9 @@ public class ObstacleProximityShake : MonoBehaviour
     [SerializeField] private float maxShakeForce = 1.5f;
     [SerializeField] private float shakeCooldown = 0.5f;
 
+    [SerializeField] private UIDangerIndicator dangerIndicator;
+
+
     private CinemachineImpulseSource impulseSource;
     private float lastShakeTime;
 
@@ -41,6 +44,8 @@ public class ObstacleProximityShake : MonoBehaviour
 
             float intensity = Mathf.Clamp01(1f - (nearest / triggerDistance));
             float finalForce = Mathf.Lerp(0.2f, maxShakeForce, intensity);
+
+            dangerIndicator?.Flash(intensity);
 
             impulseSource.GenerateImpulseWithForce(finalForce);
             lastShakeTime = Time.time;
