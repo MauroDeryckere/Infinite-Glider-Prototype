@@ -35,7 +35,6 @@ public class GlideController : MonoBehaviour
     private Rigidbody rb;
     private PlayerControls controls;
     private Vector2 moveInput;
-    private bool glideHeld;
 
     [Header("Sound")]
     [SerializeField] private AudioClip deathSound;
@@ -71,8 +70,8 @@ public class GlideController : MonoBehaviour
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += _ => moveInput = Vector2.zero;
 
-        controls.Player.Glide.performed += _ => glideHeld = true;
-        controls.Player.Glide.canceled += _ => glideHeld = false;
+        controls.Player.Glide.performed += _ => isGliding = false;
+        controls.Player.Glide.canceled += _ => isGliding = true;
     }
 
     private void OnDisable()
@@ -107,16 +106,21 @@ public class GlideController : MonoBehaviour
 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5f);
 
-        // Base Forward motion
-        Vector3 forwardMove = transform.forward * forwardSpeed;
-
+        Vector3 forwardMove = new Vector3();
         // Gravity and Glide Lift
         Vector3 verticalForce = Vector3.down * gravityForce;
 
-        if (isGliding || glideHeld)
+        if (isGliding)
         {
             verticalForce += Vector3.up * glideLift;
             glideLift *= liftDecay;
+
+            // Base Forward motion
+            forwardMove = transform.forward * forwardSpeed;
+        }
+        else
+        {
+            verticalForce = verticalForce * 3;
         }
 
         // Combine forces

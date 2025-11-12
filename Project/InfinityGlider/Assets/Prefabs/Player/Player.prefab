@@ -186,7 +186,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  maxShakeForce: 1.5
+  maxShakeForce: 1
   shakeCooldown: 0.5
 --- !u!114 &7097118710515344795
 MonoBehaviour:

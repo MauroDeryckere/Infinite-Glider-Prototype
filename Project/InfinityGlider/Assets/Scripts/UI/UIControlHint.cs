@@ -16,11 +16,15 @@ public class UIControlHint : MonoBehaviour
         }
 
         hintText.gameObject.SetActive(true);
-        StartCoroutine(HideAfterDelay());
+        StartCoroutine(ShowHintsSequence());
     }
 
-    private IEnumerator HideAfterDelay()
+    private IEnumerator ShowHintsSequence()
     {
+        hintText.text = "Use A and D to move left and right";
+        yield return new WaitForSecondsRealtime(displayDuration);
+
+        hintText.text = "Hold Space to stop gliding";
         yield return new WaitForSecondsRealtime(displayDuration);
 
         hintText.text = string.Empty;
