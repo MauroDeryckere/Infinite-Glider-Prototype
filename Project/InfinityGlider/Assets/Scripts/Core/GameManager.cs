@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
 
     private bool isGameOver = false;
 
+    public bool IsGameOver()
+    {
+        return isGameOver;
+    }
+
     private float score = 0f;
     private float highScore = 0f;
 
