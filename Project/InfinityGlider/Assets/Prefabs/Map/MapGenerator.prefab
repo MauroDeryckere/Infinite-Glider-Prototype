@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  tilePrefabs: []
+  tilePrefabs:
+  - {fileID: 5173455237402165618, guid: cc2a527a2ebe1c04da34db05247047a2, type: 3}
+  - {fileID: 5173455237402165618, guid: d452e72870d9ab14c914a6d37dcfe6b7, type: 3}
+  - {fileID: 5173455237402165618, guid: 1b3046d047cb54c43a842b10a44a6a67, type: 3}
   tilesAhead: 6
+  tilesBehind: 2
   initialZ: 0
