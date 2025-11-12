@@ -13,6 +13,7 @@ public class ObstacleProximityShake : MonoBehaviour
 
     private CinemachineImpulseSource impulseSource;
     private float lastShakeTime;
+    private GlideController glideController;
 
     void Start()
     {
@@ -21,12 +22,23 @@ public class ObstacleProximityShake : MonoBehaviour
         {
             Debug.LogError("No CinemachineImpulseSource found on this GameObject.");
         }
+
+        glideController = GetComponent<GlideController>();
+        if (glideController == null)
+        {
+            Debug.LogWarning("No GlideController found on this GameObject.");
+        }
     }
 
 
     void Update()
     {
         if (GameManager.Instance == null || GameManager.Instance.IsGameOver())
+        {
+            return;
+        }
+
+        if (glideController != null && glideController.HasShield())
         {
             return;
         }

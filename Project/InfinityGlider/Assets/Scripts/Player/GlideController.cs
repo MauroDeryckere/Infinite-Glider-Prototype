@@ -33,6 +33,11 @@ public class GlideController : MonoBehaviour
     [SerializeField] private bool isGliding = true;
     [SerializeField] private bool hasShield = false;
 
+    public bool HasShield()
+    {
+        return hasShield;
+    }
+
     private Rigidbody rb;
     private PlayerControls controls;
     private Vector2 moveInput;
@@ -164,11 +169,6 @@ public class GlideController : MonoBehaviour
 
         if (hasShield)
         {
-            hasShield = false;
-            if (shieldVisual)
-            {
-                shieldVisual.SetActive(false);
-            }
 
             Debug.Log("Shield absorbed collision!");
             return;
