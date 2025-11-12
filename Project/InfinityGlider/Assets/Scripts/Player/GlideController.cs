@@ -20,6 +20,7 @@ public class GlideController : MonoBehaviour
 
     [Header("Glide Control")]
     [SerializeField] private float liftDecay = 0.98f;
+    [SerializeField] private GameObject glider;
 
     [Header("Shield Settings")]
     [SerializeField] private GameObject shieldVisual;
@@ -70,8 +71,17 @@ public class GlideController : MonoBehaviour
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += _ => moveInput = Vector2.zero;
 
-        controls.Player.Glide.performed += _ => isGliding = false;
-        controls.Player.Glide.canceled += _ => isGliding = true;
+        controls.Player.Glide.performed += _ =>
+        {
+            isGliding = false;
+            glider?.SetActive(false);
+        };
+
+        controls.Player.Glide.canceled += _ =>
+        {
+            isGliding = true;
+            glider?.SetActive(true);
+        };
     }
 
     private void OnDisable()
