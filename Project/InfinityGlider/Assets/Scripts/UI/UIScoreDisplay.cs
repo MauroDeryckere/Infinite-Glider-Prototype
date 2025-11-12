@@ -19,6 +19,12 @@ public class UIScoreDisplay : MonoBehaviour
         }
     }
 
+    public void SetHighScoreBeat()
+    {
+        scoreText.color = Color.green;
+        highscoreText.color = Color.green;
+    }
+
     public void UpdateScore(float score, float highscore)
     {
         scoreText.text = $"Score: {score:F0}";

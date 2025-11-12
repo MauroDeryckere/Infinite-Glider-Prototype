@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
                     audioSource.PlayOneShot(highScoreBeatSound, highScoreBeatVolume);
                 }
 
+                display?.SetHighScoreBeat();
+
                 Debug.Log("New High Score!");
 
             }
@@ -98,7 +100,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         Debug.Log($"Game Over! Final Score: {score:F0}");
 
-        if (score > highScore)
+        if (score > highScore || hasBeatHighScore)
         {
             highScore = score;
             SaveHighScore();
