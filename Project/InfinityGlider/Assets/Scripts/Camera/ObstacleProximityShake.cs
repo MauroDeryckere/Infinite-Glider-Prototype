@@ -28,6 +28,7 @@ public class ObstacleProximityShake : MonoBehaviour
             return;
         }
 
+        // A separate larger trigger box / collider per obstacle would be more optimal
         Collider[] obstacles = Physics.OverlapSphere(transform.position, triggerDistance, obstacleLayer);
         if (obstacles.Length > 0 && Time.time - lastShakeTime > shakeCooldown)
         {
