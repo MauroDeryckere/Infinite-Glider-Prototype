@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int tilesAhead = 6;
     [SerializeField] private int tilesBehind = 2;
     [SerializeField] private float initialZ = 0f;
+    [SerializeField] private float verticalStep = -10; // how much Y decreases per tile
 
     private class TileEntry
     {
@@ -22,6 +23,7 @@ public class MapGenerator : MonoBehaviour
     // Pooling would be more optimal in future but prototype
     private readonly Queue<TileEntry> activeTiles = new();
     private float nextSpawnZ = 0f;
+    private float currentY = 0f;
 
     void Start()
     {
@@ -39,6 +41,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         nextSpawnZ = initialZ;
+        currentY = 0f;
 
 
         for (int i = 0; i < tilesAhead; i++)
@@ -86,7 +89,9 @@ public class MapGenerator : MonoBehaviour
         }
 
         Quaternion spawnRot = prefab.transform.rotation;
-        var go = Instantiate(prefab, new Vector3(0f, 0f, nextSpawnZ), spawnRot, transform);
+        Vector3 spawnPos = new Vector3(0f, currentY, nextSpawnZ);
+
+        var go = Instantiate(prefab, spawnPos, spawnRot, transform);
 
         float length = 20f;
         if (go.TryGetComponent<Tile>(out var tileComponent))
@@ -97,6 +102,7 @@ public class MapGenerator : MonoBehaviour
         var entry = new TileEntry { go = go, length = length, startZ = nextSpawnZ };
         activeTiles.Enqueue(entry);
 
+        currentY += verticalStep; // lower slightly for each new tile
         nextSpawnZ += length;
     }
 
