@@ -912,11 +912,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2690005946505588766, guid: e49f487534e96dd4fba5bbcc7f8c8ecf, type: 3}
   m_PrefabInstance: {fileID: 8226491177301809649}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2055046419 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8114849741085927315, guid: 26cb29724b5187d498115cdb7a24acb4, type: 3}
-  m_PrefabInstance: {fileID: 1243739959007106871}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2116198337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,22 +1397,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2055046419}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: tilePrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: 'tilePrefabs.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1748579843358071101, guid: 0ff179faacf919a488da9cfc3a7f265f, type: 3}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: 'tilePrefabs.Array.data[1]'
-      value: 
-      objectReference: {fileID: 5168269049315972355, guid: 157e8ce380db97040af3a94465d06b7b, type: 3}
     - target: {fileID: 7823823272018896549, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
       propertyPath: m_Name
       value: MapGenerator
