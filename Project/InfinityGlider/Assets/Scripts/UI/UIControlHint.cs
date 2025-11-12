@@ -21,7 +21,6 @@ public class UIControlHint : MonoBehaviour
 
     private IEnumerator HideAfterDelay()
     {
-        Debug.LogError("ControlHint: No TextMeshProUGUI assigned.");
         yield return new WaitForSecondsRealtime(displayDuration);
 
         hintText.text = string.Empty;
