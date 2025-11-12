@@ -40,6 +40,8 @@ public class GlideController : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private float deathSoundVolume = 0.8f;
+    [SerializeField] private AudioClip toggleGliderSound;
+    [SerializeField] private float toggleGliderVolume = 0.8f;
 
     private void Awake()
     {
@@ -75,12 +77,20 @@ public class GlideController : MonoBehaviour
         {
             isGliding = false;
             glider?.SetActive(false);
+            if (toggleGliderSound)
+            {
+                AudioSource.PlayClipAtPoint(toggleGliderSound, transform.position, toggleGliderVolume);
+            }
         };
 
         controls.Player.Glide.canceled += _ =>
         {
             isGliding = true;
             glider?.SetActive(true);
+            if (toggleGliderSound)
+            {
+                AudioSource.PlayClipAtPoint(toggleGliderSound, transform.position, toggleGliderVolume);
+            }
         };
     }
 

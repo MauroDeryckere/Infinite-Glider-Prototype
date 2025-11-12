@@ -280,6 +280,8 @@ MonoBehaviour:
   hasShield: 0
   deathSound: {fileID: 8300000, guid: ce8e4a5767811cc46a66d6153f71a99e, type: 3}
   deathSoundVolume: 0.8
+  toggleGliderSound: {fileID: 8300000, guid: 9b45811650b631d438f1b24a64865180, type: 3}
+  toggleGliderVolume: 0.8
 --- !u!114 &5654627859852651295
 MonoBehaviour:
   m_ObjectHideFlags: 0
