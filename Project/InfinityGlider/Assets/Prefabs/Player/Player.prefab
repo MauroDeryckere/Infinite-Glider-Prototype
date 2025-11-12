@@ -166,6 +166,8 @@ MonoBehaviour:
   shieldFadeSpeed: 2
   isGliding: 1
   hasShield: 0
+  deathSound: {fileID: 8300000, guid: ce8e4a5767811cc46a66d6153f71a99e, type: 3}
+  deathSoundVolume: 0.8
 --- !u!1 &4731404784403373463
 GameObject:
   m_ObjectHideFlags: 0

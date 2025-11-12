@@ -37,7 +37,9 @@ public class GlideController : MonoBehaviour
     private Vector2 moveInput;
     private bool glideHeld;
 
-
+    [Header("Sound")]
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private float deathSoundVolume = 0.8f;
 
     private void Awake()
     {
@@ -153,6 +155,11 @@ public class GlideController : MonoBehaviour
 
     public void Die()
     {
+        if (isDead)
+        {
+            return;
+        }
+
         isDead = true;
 
         // Disable input / physics
@@ -161,6 +168,11 @@ public class GlideController : MonoBehaviour
 
         enabled = false;
         GameManager.Instance?.OnPlayerDied();
+
+        if (deathSound)
+        {
+            AudioSource.PlayClipAtPoint(deathSound, transform.position, deathSoundVolume);
+        }
     }
 
 
