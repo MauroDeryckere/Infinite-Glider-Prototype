@@ -9,6 +9,9 @@ public class UpliftPowerUp : PowerUp
         if (other.TryGetComponent(out GlideController glide))
         {
             glide.ApplyUpliftBoost(boostForce);
+
+            base.PlayPickupSound();
+
             Destroy(gameObject);
         }
     }

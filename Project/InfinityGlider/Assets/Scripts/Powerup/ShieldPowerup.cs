@@ -9,6 +9,9 @@ public class ShieldPowerUp : PowerUp
         if (other.TryGetComponent(out GlideController glide))
         {
             glide.ActivateShield(duration);
+
+            base.PlayPickupSound();
+
             Destroy(gameObject);
         }
     }
