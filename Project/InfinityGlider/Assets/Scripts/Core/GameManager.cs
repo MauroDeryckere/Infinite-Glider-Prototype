@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
     public float HighScore => highScore;
 
     private string savePath;
+    private bool hasBeatHighScore = false;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip highScoreBeatSound;
+    [SerializeField] private float highScoreBeatVolume = 0.8f;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -27,6 +33,15 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f; // ensure 2D sound
 
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
 
@@ -46,6 +61,25 @@ public class GameManager : MonoBehaviour
         }
             
         score += Time.deltaTime * 10f;
+
+        if (score > highScore)
+        {
+            if (!hasBeatHighScore)
+            {
+                // Play sound, display visuals
+                if (highScoreBeatSound)
+                {
+                    audioSource.PlayOneShot(highScoreBeatSound, highScoreBeatVolume);
+                }
+
+                Debug.Log("New High Score!");
+
+            }
+
+            hasBeatHighScore = true;
+            highScore = score;
+        }
+
         display?.UpdateScore(score, highScore);  
     }
 
