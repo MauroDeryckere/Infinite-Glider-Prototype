@@ -49,6 +49,11 @@ MonoBehaviour:
   - {fileID: 5173455237402165618, guid: cc2a527a2ebe1c04da34db05247047a2, type: 3}
   - {fileID: 5173455237402165618, guid: d452e72870d9ab14c914a6d37dcfe6b7, type: 3}
   - {fileID: 5173455237402165618, guid: 1b3046d047cb54c43a842b10a44a6a67, type: 3}
+  - {fileID: 5173455237402165618, guid: 9b3efb9502a32f9438dccb656894c5f9, type: 3}
+  - {fileID: 5173455237402165618, guid: ca3023a619d55fd4a8babee754e2a819, type: 3}
+  - {fileID: 5173455237402165618, guid: 6cb19453bbf9abf4282fb710d70aa72f, type: 3}
+  - {fileID: 5173455237402165618, guid: f8c545cc8c0a2ba4aaacdde913955389, type: 3}
   tilesAhead: 6
   tilesBehind: 2
-  initialZ: 0
+  initialZ: 20
+  verticalStep: -0.1

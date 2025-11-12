@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -3853795194401332055}
   - component: {fileID: 877723028363033672}
   - component: {fileID: 5687753403463467579}
+  - component: {fileID: 6722235595264179515}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -84,3 +85,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintText: {fileID: 0}
   displayDuration: 3
+--- !u!114 &6722235595264179515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737923981270652348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9f0c5af3a625e4ba038adbad7aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dangerOverlay: {fileID: 0}
+  fadeSpeed: 2
+  holdDuration: 0.2

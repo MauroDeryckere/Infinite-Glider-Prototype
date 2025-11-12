@@ -295,11 +295,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4ec8bc6e3ed342abcd0aa62a3d1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerDistance: 5
+  triggerDistance: 6
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  maxShakeForce: 1
+  maxShakeForce: 2
   shakeCooldown: 0.5
   dangerIndicator: {fileID: 0}
 --- !u!114 &7097118710515344795
@@ -367,10 +367,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c62a8488ac327b409393cc194863279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warningDistance: 10
+  warningDistance: 5
   deathZoneLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   dangerIndicator: {fileID: 0}
   cooldown: 0.5
 --- !u!1 &4731404784403373463
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 1785422310678496754}
   m_Layer: 0
   m_Name: MainCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

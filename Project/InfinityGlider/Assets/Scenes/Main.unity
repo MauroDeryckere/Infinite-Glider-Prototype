@@ -212,11 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &739691323 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2737923981270652348, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
-  m_PrefabInstance: {fileID: 1616439128}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &856875987
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +651,10 @@ PrefabInstance:
       propertyPath: hintText
       value: 
       objectReference: {fileID: 7960967675321185646}
+    - target: {fileID: 6722235595264179515, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+      propertyPath: dangerOverlay
+      value: 
+      objectReference: {fileID: 2116860070}
     - target: {fileID: 8200620112703870234, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -739,17 +738,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2737923981270652348, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1616439134}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
 --- !u!114 &1616439130 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 877723028363033672, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
   m_PrefabInstance: {fileID: 1616439128}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739691323}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eb004806d0055d49ad9f0bf71ba6dcf, type: 3}
@@ -760,27 +756,23 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -3853795194401332055, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
   m_PrefabInstance: {fileID: 1616439128}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739691323}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b2fc7ea269aa114e874182847c18a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1616439134
+--- !u!114 &1616439134 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6722235595264179515, guid: bde34c094c001f642ad3f00457f6c10e, type: 3}
+  m_PrefabInstance: {fileID: 1616439128}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739691323}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c9f0c5af3a625e4ba038adbad7aa272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dangerOverlay: {fileID: 2116860070}
-  fadeSpeed: 2
-  holdDuration: 0.2
 --- !u!1 &1774713423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,17 +1057,13 @@ PrefabInstance:
       propertyPath: dangerIndicator
       value: 
       objectReference: {fileID: 1616439134}
-    - target: {fileID: -8500423481677449267, guid: 26cb29724b5187d498115cdb7a24acb4, type: 3}
-      propertyPath: warningDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8500423481677449267, guid: 26cb29724b5187d498115cdb7a24acb4, type: 3}
-      propertyPath: deathZoneLayer.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     - target: {fileID: 1682094370442725692, guid: 26cb29724b5187d498115cdb7a24acb4, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654627859852651295, guid: 26cb29724b5187d498115cdb7a24acb4, type: 3}
+      propertyPath: maxShakeForce
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5654627859852651295, guid: 26cb29724b5187d498115cdb7a24acb4, type: 3}
       propertyPath: dangerIndicator
@@ -1134,18 +1122,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3126676577524115890, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
-      propertyPath: m_Color.b
-      value: 0.11356357
-      objectReference: {fileID: 0}
-    - target: {fileID: 3126676577524115890, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
-      propertyPath: m_Color.g
-      value: 0.11356357
-      objectReference: {fileID: 0}
-    - target: {fileID: 3126676577524115890, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
-      propertyPath: m_Color.r
-      value: 0.8301887
-      objectReference: {fileID: 0}
     - target: {fileID: 7974260543639227026, guid: e5a5c391ba8ae48419f843df029d1471, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1402,30 +1378,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: initialZ
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: tilePrefabs.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: 'tilePrefabs.Array.data[3]'
-      value: 
-      objectReference: {fileID: 5173455237402165618, guid: 9b3efb9502a32f9438dccb656894c5f9, type: 3}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: 'tilePrefabs.Array.data[4]'
-      value: 
-      objectReference: {fileID: 5173455237402165618, guid: ca3023a619d55fd4a8babee754e2a819, type: 3}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: 'tilePrefabs.Array.data[5]'
-      value: 
-      objectReference: {fileID: 5173455237402165618, guid: 6cb19453bbf9abf4282fb710d70aa72f, type: 3}
-    - target: {fileID: 6907863160427071073, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
-      propertyPath: 'tilePrefabs.Array.data[6]'
-      value: 
-      objectReference: {fileID: 5173455237402165618, guid: f8c545cc8c0a2ba4aaacdde913955389, type: 3}
     - target: {fileID: 7823823272018896549, guid: 0f8245b9145a0584793e6fd45a362962, type: 3}
       propertyPath: m_Name
       value: MapGenerator
